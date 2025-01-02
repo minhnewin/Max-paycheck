@@ -30,6 +30,14 @@ def calculate_deduction_percentage(total_pay, threshold):
     deduction = (total_pay - threshold) / total_pay * 100
     return deduction
 
+def calculate_tax(final_paycheck, tax_rate):
+    # Convert tax rate to Decimal
+    tax_rate = Decimal(tax_rate) / 100
+    
+    # Calculate tax amount
+    tax_amount = final_paycheck * tax_rate
+    return tax_amount
+
 # Input values
 regular_hours = input("Enter regular hours worked: ")
 hourly_wage = input("Enter hourly wage: ")
@@ -49,10 +57,19 @@ deduction_percentage = calculate_deduction_percentage(total_pay, threshold)
 deduction_amount = (deduction_percentage / 100) * total_pay
 final_paycheck = total_pay - deduction_amount
 
+# Calculate 12% tax deduction
+tax_rate = 12  # Tax rate in percentage
+tax_amount = calculate_tax(final_paycheck, tax_rate)
+
+# Calculate final take-home pay
+take_home_pay = final_paycheck - tax_amount
+
 # Display results
 print(f"Base Pay: ${base_pay}")
 print(f"Overtime Pay: ${overtime_pay}")
 print(f"Total Paycheck Before Deduction: ${total_pay}")
 print(f"Deduction Percentage: {deduction_percentage:.2f}%")
 print(f"Deduction Amount: ${deduction_amount:.2f}")
-print(f"Final Paycheck: ${final_paycheck}")
+print(f"Paycheck After Initial Deduction: ${final_paycheck}")
+print(f"Tax Amount (12%): ${tax_amount:.2f}")
+print(f"Final Take-Home Pay: ${take_home_pay}")
